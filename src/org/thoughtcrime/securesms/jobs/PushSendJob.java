@@ -28,6 +28,7 @@ import org.whispersystems.jobqueue.requirements.NetworkRequirement;
 import org.whispersystems.libsignal.util.guava.Optional;
 import org.whispersystems.signalservice.api.messages.SignalServiceAttachment;
 import org.whispersystems.signalservice.api.messages.SignalServiceAttachmentPointer;
+import org.whispersystems.signalservice.api.messages.SignalServiceAttachmentStream;
 import org.whispersystems.signalservice.api.messages.SignalServiceDataMessage;
 import org.whispersystems.signalservice.api.push.SignalServiceAddress;
 
@@ -145,7 +146,15 @@ public abstract class PushSendJob extends SendJob {
                                                       .withStream(new ByteArrayInputStream(attachmentData.getBitmap()))
                                                       .build());
         } else {
-          quoteAttachments.add(new SignalServiceAttachmentPointer(0, attachment.getContentType(), null, null, Optional.absent(), Optional.absent(), 0, 0, Optional.absent(), Optional.fromNullable(attachment.getFileName()), attachment.isVoiceNote()));
+          quoteAttachments.add(SignalServiceAttachmentStream.newStreamBuilder()
+                                                            .withContentType(attachment.getContentType())
+                                                            .withFileName(attachment.getFileName())
+                                                            .withHeight(0)
+                                                            .withWidth(0)
+                                                            .withLength(1)
+                                                            .withStream(new ByteArrayInputStream(new byte[1]))
+                                                            .withVoiceNote(attachment.isVoiceNote())
+                                                            .build());
         }
 
       } catch (BitmapDecodingException e) {

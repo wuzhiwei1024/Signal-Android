@@ -812,6 +812,12 @@
     <string name="audio_view__pause_accessibility_description">Pause</string>
     <string name="audio_view__download_accessibility_description">Download</string>
 
+    <!-- QuoteView -->
+    <string name="QuoteView_audio">Audio</string>
+    <string name="QuoteView_video">Video</string>
+    <string name="QuoteView_photo">Photo</string>
+    <string name="QuoteView_document">Document</string>
+
     <!-- conversation_fragment_cab -->
     <string name="conversation_fragment_cab__batch_selection_mode">Batch selection mode</string>
     <string name="conversation_fragment_cab__batch_selection_amount">%s selected</string>
